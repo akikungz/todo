@@ -4,6 +4,7 @@ import TodoItem from './components/TodoItem';
 
 function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [query, setQuery] = useState<string>('');
 
   const [newTodo, setNewTodo] = useState<Todo>({ title: '', description: '', isDone: false });
 
@@ -28,6 +29,10 @@ function App() {
 
   return (
     <div className="flex flex-col w-full p-8 gap-4">
+      {/* Search */}
+      <div className="flex flex-row gap-2">
+        <input placeholder="Search" className="p-2 border border-gray-300 w-full" onChange={e => setQuery(e.target.value)} />
+      </div>
       <div className="flex flex-col w-full gap-2">
         <h1 className="text-3xl font-bold">Todos</h1>
         <input placeholder="Title" 
@@ -54,7 +59,10 @@ function App() {
           Add todo
         </button>
       </div>
-      { todos.map((todo, id) => <TodoItem key={id} id={id} todo={todo} handleEditTodo={handleEditTodo} handleSetDone={handleSetDone} />) }
+      { todos
+        .filter(todo => todo.title.toLowerCase().includes(query.toLowerCase()))
+        .map((todo, id) => <TodoItem key={id} id={id} todo={todo} handleEditTodo={handleEditTodo} handleSetDone={handleSetDone} />)
+      }
     </div>
   )
 }
