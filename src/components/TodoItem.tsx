@@ -24,7 +24,7 @@ export default function TodoItem({ todo, handleEditTodo, handleSetDone, id }: To
         )
     } else {
         return (
-            <div className={"flex flex-col gap-2 p-4 rounded-2xl" + (todo.isDone ? " bg-green-500" : "")}>
+            <div className={"flex flex-col gap-2 p-4 rounded-2xl" + (todo.isDone ? " bg-green-500/50" : " bg-gray-500/50")}>
                 <div className="flex flex-row gap-2">
                     <input type="checkbox" checked={todo.isDone} onChange={(e) => handleSetDone(id, e.target.checked)} />
                     <label className="text-lg font-bold">Todo #{id}</label>
